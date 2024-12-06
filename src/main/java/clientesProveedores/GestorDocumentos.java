@@ -19,7 +19,6 @@ public class GestorDocumentos {
         this.documentos = new ArrayList<>();
     }
 
-    // Cargar los archivos existentes
     public void cargarArchivos(DefaultTableModel tableModel) {
         File directorioBase = new File(rutaDirectorioBase);
         if (!directorioBase.exists()) {
@@ -44,7 +43,6 @@ public class GestorDocumentos {
         }
     }
 
-    // Subir archivos
     public void subirArchivos() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
@@ -70,7 +68,6 @@ public class GestorDocumentos {
         }
     }
 
-    // Descargar archivos
     public void descargarArchivos(JTable tablaDocumentos) {
         int[] filasSeleccionadas = tablaDocumentos.getSelectedRows();
         if (filasSeleccionadas.length > 0) {
@@ -99,7 +96,6 @@ public class GestorDocumentos {
         }
     }
 
-    // Eliminar archivos
     public void eliminarArchivos(JTable tablaDocumentos) {
         int[] filasSeleccionadas = tablaDocumentos.getSelectedRows();
         if (filasSeleccionadas.length > 0) {

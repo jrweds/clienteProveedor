@@ -30,8 +30,6 @@ public class ClienteProveedorMain extends JFrame {
             directorioBase.mkdir();
         }
 
-
-
         JTabbedPane pestanias = new JTabbedPane();
         pestanias.addTab("Clientes", panelClientes());
         pestanias.addTab("Proveedores", panelProveedores());
@@ -44,10 +42,8 @@ public class ClienteProveedorMain extends JFrame {
     private JPanel panelClientes() {
         JPanel panelCliente = new JPanel(new BorderLayout());
 
-        // Área de visualización
         List<Cliente> clientes = clienteDAO.obtenerTodos();
 
-        // Formulario de entrada
         JPanel formularioDeClientes = new JPanel(new GridLayout(5, 2, 5, 5));
         formularioDeClientes.add(new JLabel("Nombre:"));
         JTextField nombreCliente = new JTextField();
@@ -65,7 +61,6 @@ public class ClienteProveedorMain extends JFrame {
         JTextField dniCliente = new JTextField();
         formularioDeClientes.add(dniCliente);
 
-        // Botones
         JPanel botones = new JPanel();
         JButton botonAnadirCliente = new JButton("Añadir cliente");
         botonAnadirCliente.addActionListener(e -> {
@@ -108,7 +103,6 @@ public class ClienteProveedorMain extends JFrame {
     private JPanel panelProveedores() {
         JPanel panelProveedor = new JPanel(new BorderLayout());
 
-        // Área de visualización
         List<Proveedor> proveedores = proveedorDAO.obtenerTodos();
 
         JPanel formularioProveedores = new JPanel(new GridLayout(3, 2, 5, 5));
@@ -120,7 +114,6 @@ public class ClienteProveedorMain extends JFrame {
         JTextField NifProveedor = new JTextField();
         formularioProveedores.add(NifProveedor);
 
-        // Botones
         JPanel botones = new JPanel();
         JButton botonAnadir = new JButton("Añadir proveedor");
         botonAnadir.addActionListener(e -> {
@@ -156,16 +149,15 @@ public class ClienteProveedorMain extends JFrame {
 
         return panelProveedor;
     }
+    //////////////////////////////////
 
     private JPanel panelIncidencias() {
         JPanel panelIncidencia = new JPanel(new BorderLayout());
 
-        // Área de visualización
         List<Incidencia> incidencias = incidenciaDAO.obtenerListadoInci();
         JTextArea textoIncidencias = new JTextArea();
         actualizarPanelTextoIncidencias(textoIncidencias, incidencias);
 
-        // Formulario de entrada
         JPanel formularioIncidencias = new JPanel(new GridLayout(5, 2, 5, 5));
         formularioIncidencias.add(new JLabel("Título de la incidencia:"));
         JTextField tituloIncidencia = new JTextField();
@@ -184,7 +176,6 @@ public class ClienteProveedorMain extends JFrame {
         fechaInci.setEditable(false);
         formularioIncidencias.add(fechaInci);
 
-        // Botones
         JPanel botones = new JPanel();
         JButton botonAnadirIncidencia = new JButton("Añadir Incidencia");
         botonAnadirIncidencia.addActionListener(e -> {
@@ -242,29 +233,27 @@ public class ClienteProveedorMain extends JFrame {
         ventanaListado.setVisible(true);
     }
 
-    /////////////////////////////////////////7
+    /**
+     *
+     * @return
+     */
     private JPanel panelGestorDocumentos() {
         JPanel panelDocumentos = new JPanel(new BorderLayout());
 
-        // Modelo de la tabla
         String[] columnas = {"Nombre del Archivo", "Tipo", "Fecha"};
         tableModel = new DefaultTableModel(columnas, 0);
         JTable tablaDocumentos = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(tablaDocumentos);
 
-        // Botón para subir archivos
         JButton botonSubirArchivo = new JButton("Subir Archivos");
         botonSubirArchivo.addActionListener(e -> gestorDocumentos.subirArchivos());
 
-        // Botón para descargar archivos
         JButton botonDescargar = new JButton("Descargar Archivos");
         botonDescargar.addActionListener(e -> gestorDocumentos.descargarArchivos(tablaDocumentos));
 
-        // Botón para eliminar archivos
         JButton botonEliminar = new JButton("Eliminar Archivos");
         botonEliminar.addActionListener(e -> gestorDocumentos.eliminarArchivos(tablaDocumentos));
 
-        // Panel de botones
         JPanel panelBotones = new JPanel();
         panelBotones.add(botonSubirArchivo);
         panelBotones.add(botonDescargar);
@@ -273,12 +262,15 @@ public class ClienteProveedorMain extends JFrame {
         panelDocumentos.add(scrollPane, BorderLayout.CENTER);
         panelDocumentos.add(panelBotones, BorderLayout.SOUTH);
 
-        // Cargar los archivos existentes en la interfaz
         gestorDocumentos.cargarArchivos(tableModel);
 
         return panelDocumentos;
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         ClienteProveedorMain gestor =  new ClienteProveedorMain();
         gestor.setVisible(true);
